@@ -12,29 +12,19 @@ public class TimeUtils {
     }
 
     public static String secToTime(int a) {
-        int hh, mm, ss;
-
-        if (a < 0 || a >= 32000) {
+        if (a < 0 || a >= 86400) {
             return "-1";
         }
 
-        hh = a / 3600;
-        a = a - (3600 * hh);
-        mm = a / 60;
-        ss = a - (60 * mm);
+        int hh = a / 3600;
+        int rem = a % 3600;
+        int mm = rem / 60;
+        int ss = rem % 60;
 
-        String res = hh + ":";
-        if (mm <= 10) {
-            res = res + "0" + mm + ":";
-        } else {
-            res = res + mm + ":";
-        }
-        if (ss <= 10) {
-            res = res + "0" + ss;
-        } else {
-            res = res + ss;
-        }
+        String hourStr = String.format("%d", hh);
+        String minStr = String.format("%02d", mm);
+        String secStr = String.format("%02d", ss);
 
-        return res;
+        return hourStr + ":" + minStr + ":" + secStr;
     }
 }
